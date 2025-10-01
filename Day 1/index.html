@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="bg-cyan-500 py-4 drop-shadow-lg"></nav>
+    <div
+      class="h-screen bg-cyan-200 text-center flex flex-col items-center justify-center"
+    >
+      <h1 class="text-7xl font-mono font-semibold text-cyan-800">Welcome</h1>
+
+      <section
+        class="bg-cyan-300 p-8 m-4 h-1/2 w-1/2 rounded flex flex-row items-center justify-start space-x-8"
+      >
+        <!-- Image on the left -->
+        <div class="max-w-xs">
+          <img
+            class="w-full rounded"
+            src="https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg"
+            alt="Profile"
+          />
+        </div>
+
+        <!-- Text in the middle -->
+        <div class="flex-1 text-center">
+          <h2 class="text-3xl font-bold text-cyan-800">Jesvin Joseph</h2>
+          <p class="mt-2 text-cyan-700">
+            Frontend Developer | Passionate about React & JavaScript
+          </p>
+        </div>
+      </section>
+      <button
+        class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full"
+      >
+        More Info
+      </button>
+      <div class="bg-cyan-200 p-4 m-4 flex flex-row">
+        <button
+          class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full"
+          id="decrement"
+        >
+          -
+        </button>
+        <h2
+          class="m-5 text-7xl font-mono font-semibold text-cyan-800"
+          id="value"
+        >
+          0
+        </h2>
+        <button
+          class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full"
+          id="increment"
+        >
+          +
+        </button>
+      </div>
+    </div>
+    <script>
+      document.getElementById("value").innerHTML = 0;
+      let count = 0;
+      document.getElementById("increment").addEventListener("click", () => {
+        count++;
+        document.getElementById("value").innerText = count;
+      });
+
+      document.getElementById("decrement").addEventListener("click", () => {
+        count--;
+        document.getElementById("value").innerText = count;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="bg-violet-500 py-4 drop-shadow-lg"></nav>
+    <div class="h-screen bg-violet-200 text-center flex flex-col">
+      <h1 class="text-7xl font-mono font-semibold text-violet-800 mt-8">
+        Todo List
+      </h1>
+
+      <div class="flex flex-row items-center justify-center mt-8">
+        <input
+          class="mr-4 rounded w-80 h-10"
+          id="todoInput"
+          placeholder="Enter task"
+        />
+
+        <button
+          class="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-full"
+          id="addBtn"
+        >
+          Add
+        </button>
+      </div>
+      <ul class="mt-8 text-2xl text-violet-950" id="todoList"></ul>
+    </div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
