@@ -1,0 +1,10 @@
+
+
+.doneCheckbox {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  accent-color: #7c3aed; /* Tailwind violet-600 */
+}
