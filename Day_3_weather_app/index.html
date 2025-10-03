@@ -6,9 +6,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Weaher App</title>
   </head>
-  <body class="bg-red-900 h-screen">
-    <h1 class="text-blue-500 text-center mt-8 text-2xl">Weather App</h1>
-    <p id="para"></p>
+  <body class="bg-slate-900 h-screen">
+    <div
+      class="bg-[url('https://www.pixelstalk.net/wp-content/uploads/2016/07/Download-Free-Weather-Background.jpg')] bg-cover bg-center h-screen w-full"
+    >
+      <h1
+        class="bg-gradient-to-r from-slate-950 to-slate-500 bg-clip-text text-5xl font-extrabold text-transparent text-center mt-8 font-light text-8xl font-mono"
+      >
+        Weather App
+      </h1>
+      <div class="flex flex-row items-center justify-center mt-8">
+        <input
+          class="mr-4 rounded w-80 h-10"
+          id="inputcity"
+          placeholder="Enter City Name"
+        />
+
+        <button
+          class="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-full"
+          id="searchBtn"
+        >
+          Search
+        </button>
+      </div>
+      <div id="resultDiv" class="text-center"></div>
+    </div>
     <script src="app.js" defer></script>
   </body>
 </html>
