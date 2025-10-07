@@ -1,7 +1,32 @@
-function Profile() {
+import products from "./Products";
+const user = { name: "Jesvin", isLoggedIn: true };
+function ProductCard({ name, price, id, inStock }) {
   return (
-    <div>
-      <img src="https://i.imgur.com/MK3eW3As.jpg" alt="Katherine Johnson" />
+    <div
+      className={`h-64 w-64 p-8 text-center rounded ${
+        inStock ? "bg-teal-600" : "bg-gray-600"
+      }`}
+    >
+      <p>{id}</p>
+      <h1>Product Name:{name}</h1>
+      <h3>Price : {price}$</h3>
+      <h4>In Stock : {inStock ? "✅" : "❌"} </h4>
+    </div>
+  );
+}
+
+function ProductList() {
+  return (
+    <div className="flex flex-wrap justify-center gap-6">
+      {products.map((item) => (
+        <ProductCard
+          key={item.id}
+          name={item.name}
+          price={item.price}
+          id={item.id}
+          inStock={item.inStock}
+        />
+      ))}
     </div>
   );
 }
@@ -9,12 +34,18 @@ function Profile() {
 export default function App() {
   return (
     <>
-      <section className="flex justify-center items-center text-center flex-col">
-        <h1>Amazing Scientist</h1>
-        <Profile />
-        <Profile />
-        <Profile />
-      </section>
+      <div className="bg-blue-950 h-screen flex flex-col items-center justify-center gap-3">
+        {user.isLoggedIn ? (
+          <>
+            <h1 className="text-white text-4xl mb-4 flex-col">
+              Welcome, {user.name} 👋
+            </h1>
+            <ProductList />
+          </>
+        ) : (
+          <h1 className="text-8xl">Please Login</h1>
+        )}
+      </div>
     </>
   );
 }
