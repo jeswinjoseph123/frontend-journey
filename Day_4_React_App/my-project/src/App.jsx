@@ -1,5 +1,7 @@
+import { useState } from "react";
 import products from "./Products";
-const user = { name: "Jesvin", isLoggedIn: true };
+import Student from "./Student";
+const user = { name: "Jesvin" };
 function ProductCard({ name, price, id, inStock }) {
   return (
     <div
@@ -32,18 +34,49 @@ function ProductList() {
 }
 
 export default function App() {
+  const [isLoggedin, setisLoggedin] = useState(false);
+  function handleClick() {
+    setisLoggedin(!isLoggedin);
+  }
   return (
     <>
       <div className="bg-blue-950 h-screen flex flex-col items-center justify-center gap-3">
-        {user.isLoggedIn ? (
+        {isLoggedin ? (
           <>
             <h1 className="text-white text-4xl mb-4 flex-col">
               Welcome, {user.name} 👋
             </h1>
             <ProductList />
+            <Student />
+            <button
+              onClick={handleClick}
+              className={`w-14 h-8 flex items-center rounded-full p-1 transition-colors duration-300 ${
+                isLoggedin ? "bg-green-500" : "bg-gray-400"
+              }`}
+            >
+              <div
+                className={`w-6 h-6 bg-white rounded-full transform transition-transform duration-300 ${
+                  isLoggedin ? "translate-x-6" : "translate-x-0"
+                }`}
+              ></div>
+            </button>
           </>
         ) : (
-          <h1 className="text-8xl">Please Login</h1>
+          <>
+            <h1 className="text-8xl">Please Login</h1>
+            <button
+              onClick={handleClick}
+              className={`w-14 h-8 flex items-center rounded-full p-1 transition-colors duration-300 ${
+                isLoggedin ? "bg-green-500" : "bg-gray-400"
+              }`}
+            >
+              <div
+                className={`w-6 h-6 bg-white rounded-full transform transition-transform duration-300 ${
+                  isLoggedin ? "translate-x-6" : "translate-x-0"
+                }`}
+              ></div>
+            </button>
+          </>
         )}
       </div>
     </>
