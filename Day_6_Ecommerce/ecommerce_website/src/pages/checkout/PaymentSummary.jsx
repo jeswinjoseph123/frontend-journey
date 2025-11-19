@@ -1,6 +1,12 @@
 import dayjs from "dayjs";
+import axios from "axios";
 import { formatAmount } from "../../utils/money";
-export function PaymentSummary({ paymentSummary, deliveryOptions, cart }) {
+export function PaymentSummary({
+  paymentSummary,
+  deliveryOptions,
+  cart,
+  loadCart,
+}) {
   return (
     <>
       {paymentSummary && (
@@ -69,10 +75,21 @@ export function PaymentSummary({ paymentSummary, deliveryOptions, cart }) {
                                   deliveryOption.priceCents
                                 )}`;
                               }
+                              const selectdeliveryOption = async () => {
+                                await axios.put(
+                                  `/api/cart-items/${cartItem.productId}`,
+                                  {
+                                    deliveryOptionId: deliveryOption.id,
+                                  }
+                                );
+
+                                await loadCart();
+                              };
                               return (
                                 <div
                                   key={deliveryOption.id}
                                   className="delivery-option"
+                                  onClick={selectdeliveryOption}
                                 >
                                   <input
                                     type="radio"

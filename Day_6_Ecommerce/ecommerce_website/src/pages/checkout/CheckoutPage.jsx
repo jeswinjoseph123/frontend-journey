@@ -6,7 +6,7 @@ import "./checkout-header.css";
 import { Link } from "react-router";
 import { PaymentSummary } from "./PaymentSummary";
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
   useEffect(() => {
@@ -19,7 +19,7 @@ export function CheckoutPage({ cart }) {
       setPaymentSummary(res.data);
     };
     getCheckout();
-  }, []);
+  }, [cart]);
   return (
     <>
       <div className="checkout-header">
@@ -49,6 +49,7 @@ export function CheckoutPage({ cart }) {
         paymentSummary={paymentSummary}
         deliveryOptions={deliveryOptions}
         cart={cart}
+        loadCart={loadCart}
       />
     </>
   );
