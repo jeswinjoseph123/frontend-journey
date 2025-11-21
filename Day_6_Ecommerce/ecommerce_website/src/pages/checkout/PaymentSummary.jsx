@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { formatAmount } from "../../utils/money";
 export function PaymentSummary({
   paymentSummary,
@@ -7,6 +8,12 @@ export function PaymentSummary({
   cart,
   loadCart,
 }) {
+  const navigate = useNavigate();
+  const createOrder = async () => {
+    await axios.post("/api/orders");
+    loadCart();
+    navigate("/orders");
+  };
   return (
     <>
       {paymentSummary && (
@@ -23,6 +30,12 @@ export function PaymentSummary({
                         return deliveryOptions.id === cartItem.deliveryOptionId;
                       }
                     );
+                    const deleteCartItem = async () => {
+                      await axios.delete(
+                        `/api/cart-items/${cartItem.productId}`
+                      );
+                      await loadCart();
+                    };
                     return (
                       <div
                         key={cartItem.productId}
@@ -58,7 +71,10 @@ export function PaymentSummary({
                               <span className="update-quantity-link link-primary">
                                 Update
                               </span>
-                              <span className="delete-quantity-link link-primary">
+                              <span
+                                className="delete-quantity-link link-primary"
+                                onClick={deleteCartItem}
+                              >
                                 Delete
                               </span>
                             </div>
@@ -158,7 +174,10 @@ export function PaymentSummary({
                   </div>
                 </div>
 
-                <button className="place-order-button button-primary">
+                <button
+                  className="place-order-button button-primary"
+                  onClick={createOrder}
+                >
                   Place your order
                 </button>
               </div>
