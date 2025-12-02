@@ -6,12 +6,12 @@ app.use(express.json());
 
 //routes import
 import userRouter from "./routes/user.route.js";
-// import postRouter from "./routes/post.route.js";
+import postRouter from "./routes/post.route.js";
 
 //route declaration
 
 app.use("/api/v1/users", userRouter);
-// app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/posts", postRouter);
 
 //ex router : http://localhost:4000/api/v1/users/register
 
