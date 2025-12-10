@@ -1,0 +1,5 @@
+node_modules
+.env
+dist/
+
+mongodb+srv://jeswinjoseph08_db_user:wv7nGyAvD3NaxvPB@cluster0.fwkpobz.mongodb.net/
