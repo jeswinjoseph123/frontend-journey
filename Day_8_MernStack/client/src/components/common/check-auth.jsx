@@ -15,12 +15,13 @@ export default function CheckAuth({ isAuthenticated, user, children }) {
     isAuthenticated &&
     (location.pathname.includes("/login") ||
       location.pathname.includes("/register"))
-  )
+  ) {
     if (user?.role === "admin") {
       return <Navigate to="/admin/dashboard" />;
     } else {
       return <Navigate to="/shopping/home" />;
     }
+  }
   if (
     isAuthenticated &&
     user?.role !== "admin" &&

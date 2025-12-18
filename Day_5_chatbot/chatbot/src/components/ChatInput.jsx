@@ -1,14 +1,17 @@
 import { useState } from "react";
-import spinner from "../assets/loading-spinner.gif";
+
+import axios from "axios";
 export function ChatInput({ chatMessages, setchatMessages }) {
   const [inputText, setinputText] = useState("");
-  const [loading, setLoading] = useState(false);
 
   function saveInputText(e) {
     setinputText(e.target.value);
   }
 
-  function sendMessage() {
+  async function sendMessage() {
+    if (!inputText.trim()) return;
+
+    // 1️⃣ Add user message immediately
     const newChatMessage = [
       ...chatMessages,
       {
@@ -17,20 +20,58 @@ export function ChatInput({ chatMessages, setchatMessages }) {
         id: crypto.randomUUID(),
       },
     ];
-    setchatMessages(newChatMessage);
 
-    setLoading(true);
-    const response = Chatbot.getResponse(inputText);
+    setchatMessages(newChatMessage);
+    setinputText("");
+
+    // 2️⃣ Add temporary bot loading message
+    const loadingMessageId = crypto.randomUUID();
     setchatMessages([
       ...newChatMessage,
       {
-        message: response,
+        message: "",
         sender: "robot",
-        id: crypto.randomUUID(),
+        id: loadingMessageId,
+        isLoading: true,
       },
     ]);
-    setLoading(false);
-    setinputText("");
+
+    try {
+      // 3️⃣ Call your backend
+      const response = await axios.post("http://localhost:4000/api/chat", {
+        message: inputText,
+      });
+
+      const botMessage = response.data.reply || "No response";
+
+      // 4️⃣ Replace loading message with actual bot response
+      setchatMessages([
+        ...newChatMessage,
+        {
+          message: botMessage,
+          sender: "robot",
+          id: loadingMessageId,
+        },
+      ]);
+    } catch (error) {
+      console.error("Frontend error:", error);
+      setchatMessages([
+        ...newChatMessage,
+        {
+          message: "Something went wrong. Try again.",
+          sender: "robot",
+          id: loadingMessageId,
+        },
+      ]);
+    }
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    } else if (event.key === "Escape") {
+      setinputText("");
+    }
   }
 
   return (
@@ -40,6 +81,7 @@ export function ChatInput({ chatMessages, setchatMessages }) {
         placeholder="Send a message to Chatbot"
         size="30"
         onChange={saveInputText}
+        onKeyDown={handleKeyDown}
         value={inputText}
       />
       <button
@@ -48,13 +90,6 @@ export function ChatInput({ chatMessages, setchatMessages }) {
       >
         Send
       </button>
-      {loading && (
-        <img
-          src={spinner}
-          alt="Loading..."
-          className="w-[40px] h-[40px] ml-3 animate-spin"
-        />
-      )}
     </div>
   );
 }

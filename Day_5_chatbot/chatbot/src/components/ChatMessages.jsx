@@ -14,13 +14,14 @@ export function ChatMessages({ chatMessages }) {
   return (
     <div
       ref={chatMessagesRef}
-      className="chat-messages-container flex-grow mt-[20px] overflow-y-scroll overflow-x-hidden scrollbar-hide pb-[10px]"
+      className="chat-messages-container flex-grow mt-[20px] overflow-y-auto overflow-x-hidden scrollbar-hide pb-[10px]"
     >
       {chatMessages.map((message) => (
         <ChatMessage
+          key={message.id}
           message={message.message}
           sender={message.sender}
-          key={message.id}
+          isLoading={message.isLoading}
         />
       ))}
     </div>
