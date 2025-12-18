@@ -38,9 +38,10 @@ export function ChatInput({ chatMessages, setchatMessages }) {
 
     try {
       // 3️⃣ Call your backend
-      const response = await axios.post("http://localhost:4000/api/chat", {
-        message: inputText,
-      });
+      const response = await axios.post(
+        "https://frontend-journey-production.up.railway.app/api/chat",
+        { message: inputText }
+      );
 
       const botMessage = response.data.reply || "No response";
 
