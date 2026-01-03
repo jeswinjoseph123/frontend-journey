@@ -8,7 +8,7 @@ import { OrdersPage } from "./pages/orders/OrdersPage";
 import { TrackingPage } from "./pages/tracking/TrackingPage";
 import { NotFoundPage } from "./pages/notfoundpge/NotfoundPage";
 
-// window.axios = axios;
+window.axios = axios;
 
 function App() {
   const [cart, setCart] = useState([]);
