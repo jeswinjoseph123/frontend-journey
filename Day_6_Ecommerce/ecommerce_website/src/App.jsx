@@ -8,6 +8,8 @@ import { OrdersPage } from "./pages/orders/OrdersPage";
 import { TrackingPage } from "./pages/tracking/TrackingPage";
 import { NotFoundPage } from "./pages/notfoundpge/NotfoundPage";
 
+// window.axios = axios;
+
 function App() {
   const [cart, setCart] = useState([]);
   const loadCart = async () => {
@@ -26,9 +28,15 @@ function App() {
           path="checkout"
           element={<CheckoutPage cart={cart} loadCart={loadCart} />}
         />
-        <Route path="orders" element={<OrdersPage cart={cart} />} />
-        <Route path="tracking" element={<TrackingPage cart={cart} />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="orders"
+          element={<OrdersPage cart={cart} loadCart={loadCart} />}
+        />
+        <Route
+          path="tracking/:orderId/:productId"
+          element={<TrackingPage cart={cart} />}
+        />
+        <Route path="*" element={<NotFoundPage cart={cart} />} />
       </Routes>
     </>
   );

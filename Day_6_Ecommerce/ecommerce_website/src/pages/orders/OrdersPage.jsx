@@ -7,7 +7,7 @@ import { Header } from "../../components/Header";
 import "./OrdersPage.css";
 import { OrdersList } from "./OrdersList";
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, loadCart }) {
   const [orders, setOders] = useState([]);
   useEffect(() => {
     const getOrders = async () => {
@@ -19,7 +19,7 @@ export function OrdersPage({ cart }) {
   return (
     <>
       <Header cart={cart} />
-      <OrdersList orders={orders} />
+      <OrdersList orders={orders} loadCart={loadCart} />
     </>
   );
 }

@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { formatAmount } from "../../utils/money";
+import { CartItemDetails } from "./CartItemDetail";
 export function PaymentSummary({
   paymentSummary,
   deliveryOptions,
@@ -30,12 +31,7 @@ export function PaymentSummary({
                         return deliveryOptions.id === cartItem.deliveryOptionId;
                       }
                     );
-                    const deleteCartItem = async () => {
-                      await axios.delete(
-                        `/api/cart-items/${cartItem.productId}`
-                      );
-                      await loadCart();
-                    };
+
                     return (
                       <div
                         key={cartItem.productId}
@@ -49,36 +45,10 @@ export function PaymentSummary({
                         </div>
 
                         <div className="cart-item-details-grid">
-                          <img
-                            className="product-image"
-                            src={cartItem.product.image}
+                          <CartItemDetails
+                            cartItem={cartItem}
+                            loadCart={loadCart}
                           />
-
-                          <div className="cart-item-details">
-                            <div className="product-name">
-                              {cartItem.product.name}
-                            </div>
-                            <div className="product-price">
-                              {formatAmount(cartItem.product.priceCents)}
-                            </div>
-                            <div className="product-quantity">
-                              <span>
-                                Quantity:{" "}
-                                <span className="quantity-label">
-                                  {cartItem.quantity}
-                                </span>
-                              </span>
-                              <span className="update-quantity-link link-primary">
-                                Update
-                              </span>
-                              <span
-                                className="delete-quantity-link link-primary"
-                                onClick={deleteCartItem}
-                              >
-                                Delete
-                              </span>
-                            </div>
-                          </div>
 
                           <div className="delivery-options">
                             <div className="delivery-options-title">
